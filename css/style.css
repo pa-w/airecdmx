@@ -1,0 +1,175 @@
+/* CSS for mobile */
+body {
+	margin: 0 !important;
+	padding: 0 !important; 
+}
+small { display: none; }
+.highlight small { 
+	display: inline; 
+	position: relative; 
+	font-size: .5em;
+
+}
+blockquote { 
+	text-align: justify;
+}
+ul {
+	list-style-type: circle;
+	list-style-position: inside;
+	margin-left: 2.5em;
+}
+.chart { max-width: 100%;}
+.tip { display: none; }
+.highlight .tip { 
+	display: block;
+	position: absolute;
+	font-size: 0.7em;
+	padding: 1em;
+}
+ul {
+	padding-left: 10px;
+	list-style-type: none;
+}
+.tip ul  {
+	padding: 0;
+}
+path.line { 
+	fill: none;
+	stroke: red;
+}
+path.line.anio_2014 { 
+	stroke: green;
+}
+path.line.anio_2015 {
+	stroke: blue;
+}
+path.line.anio_2016 {
+	stroke: red;
+}
+circle.highlight { 
+	fill: red !important;
+}
+circle {
+	fill: red;
+}
+rect {
+	fill: none;
+}
+rect.anio_2014 { 
+	fill: white;
+}
+.anio_2015.amparo  {
+	fill: rgba(0, 0, 255, 0.1);
+}
+.anio_2015.reglamento, .anio_2016.reglamento {
+	fill: rgba(0, 255, 0, 0.1);
+}
+rect.highlight { 
+	fill: red;
+}
+/* MOVIE CONTAINER */
+#movie {
+	width: 0 !important;
+	max-width: 0 !important;
+	padding: 0;
+	margin: 0;
+}
+#movie > div { 
+	position: relative; 
+	top: 50vh;
+	width: 100vw;
+	margin-bottom: 75vh;
+	color: lightgray;
+}
+#movie > div.highlight { 
+	color: black;
+}
+#movie div.short_scene {
+	top: 25vh !important;
+	margin-bottom: 75vh;
+}
+#movie div.last_scene {
+	top: 0;
+	margin-bottom: 50vh;
+}
+#movie div p {
+	font-size: 1.1em;
+	text-align: center;
+	padding: 0.5em;
+	padding-right: 1em;
+}
+.highlight .red { 
+	background-color: rgba(255, 0, 0, 0.5);
+	color: black;
+}
+.highlight .purple { 
+	background-color: rgba(193, 144, 212, 0.5);
+	color: black;
+}
+#intro { 
+	height: 100%;
+	margin-bottom: 0 !important;
+	top: 0 !important;
+}
+#play_ctrl {
+	top: 0vh !important;
+	padding: 2em;
+}
+#start { 
+	top: 0 !important;
+}
+#intro h1 {
+	padding: 1.5em;
+	text-align: center;
+}
+/* FIXED CONTAINER */
+#fixed {
+	position: fixed;
+	top: 50vh;
+	left: 0;
+	width: 100%;
+	height: 50%;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+#a_map { 
+	height: 100%;
+}
+/* CSS for tablets 
+@media (min-width: 768px) {
+	#intro { 
+		height: 100vh;
+		background-color: red;
+	}
+	#movie .scene { 
+		margin-bottom: 50%;
+	}
+}
+*/
+/* CSS for desktop */
+@media (min-width: 992px) {
+	#fixed {
+		left: 50%;
+		top: 0;
+		width: 50%;
+		height: 100%;
+
+	}
+	#movie > div {
+		width: 50vw;
+		margin-bottom: 0 !important;
+		font-size: 2em;
+	}
+	#movie  {
+		margin-bottom: 110vh;
+	}
+	#intro h1 {
+		font-size: 3em;
+	}
+}
+/* CSS for large devices 
+@media (min-width: 1200px) {
+	body { background-color: yellow; }
+}
+*/
+
