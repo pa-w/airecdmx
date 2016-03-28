@@ -49,7 +49,7 @@ $(document).ready(function () {
 							maxs.push (ext [1]);
 							mins.push (ext [0]);
 						}
-						lines.push ({values: values, attrs: {"class": "line anio_" + y}});
+						lines.push ({values: values, attrs: {"class": "line anio_" + y, "stepped": true}});
 					}
 				}
 				var scale = d3.scale.linear ().domain ([Math.min.apply (Math, mins), Math.max.apply (Math, maxs)]);
@@ -73,7 +73,7 @@ $(document).ready(function () {
 						var ext = d3.extent (values, function (a) { return a.avg; })
 						maxs.push (ext [1]);
 						mins.push (ext [0]);
-						lines.push ({key: args.contaminante, values: values, attrs: {"class": "line anio_" + y} });
+						lines.push ({key: args.contaminante, values: values, attrs: {"class": "line anio_" + y, "stepped": true} });
 					}
 				}
 				var scale = d3.scale.linear ().domain ([Math.min.apply (Math, mins), Math.max.apply  (Math, maxs)]);
@@ -89,13 +89,22 @@ $(document).ready(function () {
 						{"control_element": ".semana", "element_remove_class": "highlight"},
 						{"control_element": ".semana_" + x.semana, "element_add_class": "highlight"},
 						{"control_chart": "semana", "quantify": "contaminantes", "quantifier": "semana", "quantifier_args": {"semana": x.semana, "contaminante": d.contaminante } }
-					];
-					return {"r": 1, "value": Math.round(x.avg), "y": a.scale (x.avg), "class": "line semana anio dia semana_" + x.semana + " anio_" + x.anio + " dia_" + x.dia, "data": {parse: parse}};
+					], note, periodo = "referencia";
+					if (x.semana == 1 && x.dia == 6) { 
+						note = x.anio;	
+					}
+					if ((x.semana > 29 && x.anio == 2015) || x.anio == 2016) {
+						periodo = "amparo"
+					} 
+					if ((x.semana > 49 && x.anio == 2015) || x.anio == 2016) { 
+						periodo = "reglamento"
+					}
+					return {"note": note, "r": 1, "value": Math.round(x.avg), "y": a.scale (x.avg), "class": periodo + " line semana anio dia semana_" + x.semana + " anio_" + x.anio + " dia_" + x.dia, "data": {parse: parse}};
 				},
 				semana: function (x, d, a) { 
 					var days = ["dom", "lun", "mar", "mie", "jue", "vie", "sab"];
 					
-					return {"label": days [x.dia], "value": Math.round (x.avg), "y": a.scale (x.avg), "class": "line", "data": {}};
+					return {"label": days [x.dia], "value": x.anio + ": " + Math.round (x.avg), "y": a.scale (x.avg), "class": "line", "data": {}};
 				},
 				contaminantes: function (x, d, a) { 
 					var parse = [
@@ -106,6 +115,7 @@ $(document).ready(function () {
 					var data = {
 						parse: parse
 					}, 
+						note, label,
 						periodo = "referencia", 
 						semana = parseInt (x.semana), 
 						anio = parseInt (x.anio);
@@ -116,7 +126,10 @@ $(document).ready(function () {
 					if ((semana > 49 && anio == 2015) || anio == 2016) { 
 						periodo = "reglamento"
 					}
-					return {"value": Math.round (x.avg), "label": "semana " + semana, "class": "anio_" + anio + " line semana " + periodo + " semana_" + semana, "y": a.scale (x.avg), "r": 1, "data": data};
+					if (anio == 2013) {
+						label = "semana " + semana;	
+					}
+					return {"value": anio + ": " + Math.round (x.avg), "label": label, "class": "anio_" + anio + " line semana " + periodo + " semana_" + semana, "y": a.scale (x.avg), "r": 1, "data": data};
 				}
 			}
 		}, callbacks: {

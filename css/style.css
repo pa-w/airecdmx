@@ -33,7 +33,7 @@ ul {
 .tip ul  {
 	padding: 0;
 }
-text {
+text, text.label {
 	display: none;
 	fill: red;
 	font-size: 0.7em;
@@ -42,7 +42,7 @@ text {
 	fill: black;
 	font-size: 0.5em;
 }
-text.highlight, #semana text { 
+text.highlight, #semana text, text.note { 
 	display: inline;
 }
 path.line { 
@@ -80,7 +80,10 @@ rect.anio_2015.reglamento, rect.anio_2016.reglamento {
 	fill: rgba(0, 255, 0, 0.1);
 }
 rect.highlight { 
-	fill: rgba(255,0,0,0.2); 
+	fill: rgba(255,0,0,0.2) !important; 
+}
+rect.semana_1 { 
+	fill: rgba(0,100,100, 0.5);
 }
 /* MOVIE CONTAINER */
 #movie {

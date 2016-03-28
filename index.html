@@ -21,17 +21,30 @@
 	</head>
 	<body>
 	<div id="movie" data-movie>
-		<div id="scene_ozono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "ozono"}'>
-			<h1>Ozono</h1>
-			<div id="ozono" class="chart cont" data-chart="lines" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "ozono"}'></div>
-		</div>
-		<div id="scene_pm10" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "pm10"}'>
+		<div id="scene_pm10" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "pm10"}'>
 			<h1>PM10</h1>
-			<div id="pm10" class="chart cont" data-chart="lines" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "pm10"}'></div>
+			<div id="pm10" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "pm10"}'></div>
 		</div>
+		<div id="scene_dioxido_de_azufre" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "dioxido_de_azufre"}'>
+			<h1>di&oacute;xido de azufre</h1>
+			<div id="dioxido_de_azufre" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "dioxido_de_azufre"}'></div>
+		</div>
+		<div id="scene_ozono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "ozono"}'>
+			<h1>Ozono</h1>
+			<div id="ozono" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "ozono"}'></div>
+		</div>
+		<div id="scene_monoxido_de_carbono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "monoxido_de_carbono"}'>
+			<h1>mon&oacute;xido de carbono</h1>
+			<div id="monoxido_de_carbono" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "monoxido_de_carbono"}'></div>
+		</div>
+		<div id="scene_dioxido_de_nitrogeno" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "dioxido_de_nitrogeno"}'>
+			<h1>di&oacute;xido de nitr&oacute;geno</h1>
+			<div id="dioxido_de_nitrogeno" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "dioxido_de_nitrogeno"}'></div>
+		</div>
+
 	</div>
 	<div id="fixed">
-		<div id="contaminante" data-chart="lines" class="chart"></div>
+		<div id="contaminante" data-chart="lines" class="chart cont"></div>
 		<div class="row">
 			<div id="semana" data-chart="lines" class="chart cont col-xs-6"></div>
 		</div>
