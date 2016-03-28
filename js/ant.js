@@ -392,8 +392,8 @@ Ant.prototype = {
 		var qn = quantifier ? {fn: q, context: this, args: quantifier.ar, data: quantifier.data} : null;
 		this.charts [chart].redraw (quantifier.data, qn);
 		this.charts [chart].on ("click", function (a, id, x, el) { this.parseElement (el); }, this); 
-		this.charts [chart].on ("mouseover", function (a, id, x, el) { this.parseElement (el); }, this); 
-		this.charts [chart].on ("mouseout", function (a, id, x, el) { this.parseElement (el); }, this); 
+		this.charts [chart].on ("mouseover", function (a, id, x, el) { console.log (chart); this.parseElement (el); }, this); 
+		//this.charts [chart].on ("mouseout", function (a, id, x, el) { this.parseElement (el); }, this); 
 	},
 	quantifyMap: function (map, layer, quantifier) {
 		if (this.conf.quantifiers && this.conf.quantifiers ["maps"]) {
@@ -489,7 +489,6 @@ Ant.prototype = {
 					for (var i in trigg) {  
 						$("[data-subscribe_media='" + elm.id + "'][data-subscribe_every='" + trigg [i] + "']").each (parseCb (context));
 					}
-					//console.log (currentSecond);
 					$("[data-subscribe_media='" + elm.id + "'][data-subscribe_time='" + currentSecond + "']").each (parseCb (context));
 					obj.currentSecond = currentSecond;
 
@@ -672,24 +671,34 @@ var asChart = function () {
 		if (quantifier) {
 			// this generates a callback that gives us the chance to edit every attribute in the chart element, and edit it with the users' values (class, degrees, x, y, etc).
 			return function (selector, a, i) {  
-				var qn = quantifier;
+				var qn = quantifier, attrs;
 				if (Array.isArray(a)) { //no objects please, only arrays.
 					var rets = [];
 					// this is for a nested collection. It only supports the first two dimensions. AFAIK. 
-					for (var d in a) { 
-						var ret = qn.fn.apply (qn.context, [a [d], qn.args, qn.data]); //calls the users' callback for every item. 
+					var fns = [];
+					if (!i) { 
+						for (var d in a) { 
+							fns.push (a [d]);
+						}
+					} else {
+						fns.push (a [i]);
+					}
+					for (var x in fns) { 
+						var ret = qn.fn.apply (qn.context, [fns [x], qn.args, qn.data]); //calls the users' callback for every item. 
 						if (innerCallback) { 
 							ret = innerCallback.apply (this, [ret]); // calls charts' "inner" callback with users' input.
 						}
 						rets.push (ret);
 					}
-					var attrs = callback.apply (this, [rets ]); // calls charts' normal callback with the collected return values from the inner callback;
+					attrs = callback.apply (this, [rets ]); // calls charts' normal callback with the collected return values from the inner callback;
 				} else if (callback) {
 					var ret = qn.fn.apply (qn.context, [a, qn.args, qn.data]);
-					var attrs = callback.apply (this, [ret]); 
+					attrs = callback.apply (this, [ret]); 
 				} else {
-					var attrs = qn.fn.apply (qn.context [a, qn.args, qn.data]);
+					attrs = qn.fn.apply (qn.context [a, qn.args, qn.data]);
 				}
+				this.setElementAttributes (selector, attrs);
+				/*
 				var data = attrs.data;
 				attrs.data = null;
 				d3.select (selector).attr (attrs);
@@ -702,6 +711,7 @@ var asChart = function () {
 						d3.select (selector).attr ("data-" + d, val);
 					}
 				}
+				*/
 			}
 		}
 		return function (selector, d) { d3.select (selector).attr ("class", ""); };
@@ -822,6 +832,7 @@ asChart.call (ant.charts.bars.prototype);
 asBars.call (ant.charts.bars.prototype);
 var asLines = function () {
 	this.redraw  = function (d, quantifier) { 
+		this.callbacks = {};
 		var data = d.data;
 		d.scale.range ([this.height, 0]); // this comes from the prequantifier and it is used by the quantifier 
 		var lines = data; //TODO verify if this works with a single line..
@@ -838,7 +849,7 @@ var asLines = function () {
 				var attrs = {};
 				var cHeight = height;
 				for (var i in rets) {
-					var origY = cHeight - rets [i].y;
+					var origY = rets [i].y;
 					rets [i].y = 0;
 					rets [i].x = pointDistance * i;
 					rets [i].width = pointDistance;
@@ -846,8 +857,7 @@ var asLines = function () {
 
 					var rect = container.insert ("rect", ":first-child")
 						.on ("click", this.createCallback ("mouseover"))
-						.on ("mouseover", this.createCallback ("mouseover"))
-						.on ("mouseout", this.createCallback ("mouseout"));
+						.on ("mouseover", this.createCallback ("mouseover"));
 					this.setElementAttributes (rect, rets [i]);
 
 					rets [i].y = origY;
@@ -858,9 +868,18 @@ var asLines = function () {
 
 					var circle = container.insert ("circle")
 						.on ("click", this.createCallback ("mouseover"))
-						.on ("mouseover", this.createCallback ("mouseover"))
-						.on ("mouseout", this.createCallback ("mouseout"));
+						.on ("mouseover", this.createCallback ("mouseover"));
 					this.setElementAttributes (circle, rets [i]);
+					if (rets [i].value) {
+						var text = container.append("text").text (rets [i].value);
+						this.setElementAttributes (text, rets [i]);
+					}
+					if (rets [i].label) {
+						var text = container.append ("text").text (rets [i].label).classed ("label", true);
+						var r = rets [i];
+						r.y = cHeight; 
+						this.setElementAttributes (text, rets [i]);
+					}
 					rets [i].y = null;
 				//	$.extend (attrs, rets);
 				}
@@ -869,7 +888,8 @@ var asLines = function () {
 
 				var line = container.insert ("path");
 				var svgLine = d3.svg.line ().x (x).y (y);
-				line.attr ("d", function (t) { return svgLine (ys) });
+				line.attr ("d", function (t) { return svgLine (ys) })
+					.on ("click", this.createCallback ("mouseover"));
 				this.setElementAttributes (line, origAttrs);
 				
 
@@ -877,23 +897,17 @@ var asLines = function () {
 			}
 		}
 
-		var bar = this.svg.selectAll ("g")
-			.data (lines);
 		var quantifierCb = this.quantifierCallback, me = this; 
-
-		bar.enter ().append ("g")
-			.attr ("transform", "translate (0, " + this.margin.top + ")")
-			.each (function (d, e) { 
-				var data, attrs = d.attrs;
-				var qn = quantifierCb.apply (me, [quantifier, after (bar, attrs)]); 
-				qn.apply  (me, [this, d.values, e]);  
-				console.log (attrs);
-				me.setElementAttributes (d3.select (this), attrs);
-			})
-			.on ("click", this.createCallback ("mouseover"))
-			.on ("mouseover", this.createCallback ("mouseover"))
-			.on ("mouseout", this.createCallback ("mouseout"));
-
+		this.svg.selectAll ("g").remove (); //HACK lets see later how to UPDATE them the elements instead of just removing all... 
+		for (var i in lines) { 
+			var line = lines [i];
+			var bar = this.svg.append ("g")
+				.on ("click", this.createCallback ("mouseover"))
+				.on ("mouseover", this.createCallback ("mouseover"));
+			var qn = quantifierCb.apply (this, [quantifier, after (bar, line.attrs)]); 
+			qn.apply  (this, [bar, line.values]);  
+			this.setElementAttributes (bar, line.attrs);
+		}
 	}
 	return this;
 }
@@ -1220,7 +1234,6 @@ Scenify.prototype = {
 		}
 	},
 	enterCallback: function (ev) { 
-		console.log ("enter scene");
 		var elm = ev.target.triggerElement ();
 		this.currentScene = ev.target;
 		this.trigger ("scene_enter", [elm]);

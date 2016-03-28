@@ -33,9 +33,24 @@ ul {
 .tip ul  {
 	padding: 0;
 }
+text {
+	display: none;
+	fill: red;
+	font-size: 0.7em;
+}
+.cont text { 
+	fill: black;
+	font-size: 0.5em;
+}
+text.highlight, #semana text { 
+	display: inline;
+}
 path.line { 
 	fill: none;
-	stroke: red;
+	stroke: rgba(0,0,0,0.4);
+}
+path.line.anio_2013 { 
+	stroke: purple;
 }
 path.line.anio_2014 { 
 	stroke: green;
@@ -50,22 +65,22 @@ circle.highlight {
 	fill: red !important;
 }
 circle {
-	fill: red;
-}
-rect {
 	fill: none;
 }
-rect.anio_2014 { 
-	fill: white;
+rect {
+	fill: rgba(255,255,255,0.0); 
 }
-.anio_2015.amparo  {
+rect.anio_2013 { 
+	fill: rgba(255,255,255,0.0);
+}
+rect.anio_2015.amparo  {
 	fill: rgba(0, 0, 255, 0.1);
 }
-.anio_2015.reglamento, .anio_2016.reglamento {
+rect.anio_2015.reglamento, rect.anio_2016.reglamento {
 	fill: rgba(0, 255, 0, 0.1);
 }
 rect.highlight { 
-	fill: red;
+	fill: rgba(255,0,0,0.2); 
 }
 /* MOVIE CONTAINER */
 #movie {
@@ -73,12 +88,13 @@ rect.highlight {
 	max-width: 0 !important;
 	padding: 0;
 	margin: 0;
+	margin-bottom: 75vh;
 }
 #movie > div { 
 	position: relative; 
-	top: 50vh;
+	top: 10vh;
 	width: 100vw;
-	margin-bottom: 75vh;
+	margin-bottom: 5vh;
 	color: lightgray;
 }
 #movie > div.highlight { 
@@ -124,6 +140,7 @@ rect.highlight {
 }
 /* FIXED CONTAINER */
 #fixed {
+	background-color: white;
 	position: fixed;
 	top: 50vh;
 	left: 0;

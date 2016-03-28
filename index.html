@@ -21,11 +21,20 @@
 	</head>
 	<body>
 	<div id="movie" data-movie>
-		<div id="content">
+		<div id="scene_ozono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "ozono"}'>
+			<h1>Ozono</h1>
+			<div id="ozono" class="chart cont" data-chart="lines" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "ozono"}'></div>
+		</div>
+		<div id="scene_pm10" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "pm10"}'>
+			<h1>PM10</h1>
+			<div id="pm10" class="chart cont" data-chart="lines" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "pm10"}'></div>
 		</div>
 	</div>
 	<div id="fixed">
-		<div id="ctrls"><a id="init" data-control data-callback="init">Iniciar</a></div>
+		<div id="contaminante" data-chart="lines" class="chart"></div>
+		<div class="row">
+			<div id="semana" data-chart="lines" class="chart cont col-xs-6"></div>
+		</div>
 	</div>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/aire.js"></script>
