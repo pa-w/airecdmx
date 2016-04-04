@@ -13,6 +13,9 @@ small { display: none; }
 blockquote { 
 	text-align: justify;
 }
+p {
+	font-size: 0.3em;
+}
 ul {
 	list-style-type: circle;
 	list-style-position: inside;
@@ -36,30 +39,35 @@ ul {
 text, text.label {
 	display: none;
 	fill: red;
-	font-size: 0.7em;
+	font-size: 0.3em;
 }
 .cont text { 
 	fill: black;
 	font-size: 0.5em;
 }
 text.highlight, #semana text, text.note { 
+	
 	display: inline;
 }
 path.line { 
 	fill: none;
 	stroke: rgba(0,0,0,0.4);
 }
-path.line.anio_2013 { 
+path.line.anio_2013, span.anio_2013 { 
 	stroke: purple;
+	background-color: purple;
 }
-path.line.anio_2014 { 
+path.line.anio_2014, span.anio_2014 { 
 	stroke: green;
+	background-color: green;
 }
-path.line.anio_2015 {
+path.line.anio_2015, span.anio_2015 {
 	stroke: blue;
+	background-color: blue;
 }
-path.line.anio_2016 {
+path.line.anio_2016, span.anio_2016 {
 	stroke: red;
+	background-color: red;
 }
 circle.highlight { 
 	fill: red !important;
@@ -69,6 +77,24 @@ circle {
 }
 rect {
 	fill: rgba(255,255,255,0.0); 
+}
+rect.square { 
+	fill: rgba(179, 0, 179, 0.1) !important;
+}
+rect.column { 
+	fill: rgba(179, 0, 179, 0.05) !important;
+}
+ul.legend { 
+	margin: 0 !important;
+}
+ul.legend li { 
+	display: inline;
+}
+ul.legend span { 
+	display: inline-block;
+	width: 15px;
+	height: 2px;
+	margin-bottom: 5px;
 }
 rect.anio_2013 { 
 	fill: rgba(255,255,255,0.0);
@@ -112,7 +138,7 @@ rect.semana_1 {
 	margin-bottom: 50vh;
 }
 #movie div p {
-	font-size: 1.1em;
+	font-size: 1.0em;
 	text-align: center;
 	padding: 0.5em;
 	padding-right: 1em;

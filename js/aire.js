@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	var imeca = function (contaminante, concentracion) { 
+		switch (contaminante) { 
+			case 'ozono': 
+		}
+	}
 	var conf = {
 		data: {
 			contaminantes: { 
@@ -99,7 +104,7 @@ $(document).ready(function () {
 					if ((x.semana > 49 && x.anio == 2015) || x.anio == 2016) { 
 						periodo = "reglamento"
 					}
-					return {"note": note, "r": 1, "value": Math.round(x.avg), "y": a.scale (x.avg), "class": periodo + " line semana anio dia semana_" + x.semana + " anio_" + x.anio + " dia_" + x.dia, "data": {parse: parse}};
+					return {"note": note, "r": 2, "value": Math.round(x.avg), "y": a.scale (x.avg), "class": periodo + " line semana anio dia semana_" + x.semana + " anio_" + x.anio + " dia_" + x.dia, "data": {parse: parse}};
 				},
 				semana: function (x, d, a) { 
 					var days = ["dom", "lun", "mar", "mie", "jue", "vie", "sab"];

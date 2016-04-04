@@ -21,32 +21,63 @@
 	</head>
 	<body>
 	<div id="movie" data-movie>
-		<div id="scene_pm10" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "pm10"}'>
+		<div id="text_intro" data-control_element="#fixed" data-element_hide>
+			<p>Dashboard de visualizaci&oacute;n de datos de la calidad del aire.</p>
+			<p>Scroll para comenzar, click (en mobile) o hover (en desktop) en las gr&aacute;ficas para interactuar m&aacute;s a detalle</p>
+		</div>
+		<div id="scene_pm10" data-control_element="#fixed" data-element_toggle data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "pm10"}'>
 			<h1>PM10</h1>
+			<p>Nivel diario promedio 2013 - 2016</p>
 			<div id="pm10" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "pm10"}'></div>
 		</div>
 		<div id="scene_dioxido_de_azufre" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "dioxido_de_azufre"}'>
-			<h1>di&oacute;xido de azufre</h1>
+			<h1>Di&oacute;xido de azufre</h1>
+			<p>Nivel diario promedio 2013 - 2016</p>
 			<div id="dioxido_de_azufre" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "dioxido_de_azufre"}'></div>
 		</div>
 		<div id="scene_ozono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "ozono"}'>
 			<h1>Ozono</h1>
+			<p>Nivel diario promedio 2013 - 2016</p>
 			<div id="ozono" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "ozono"}'></div>
 		</div>
 		<div id="scene_monoxido_de_carbono" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "monoxido_de_carbono"}'>
-			<h1>mon&oacute;xido de carbono</h1>
+			<h1>Mon&oacute;xido de carbono</h1>
+			<p>Nivel diario promedio 2013 - 2016</p>
 			<div id="monoxido_de_carbono" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "monoxido_de_carbono"}'></div>
 		</div>
 		<div id="scene_dioxido_de_nitrogeno" data-control_chart="contaminante" data-quantify="contaminantes" data-quantifier="contaminantes" data-quantifier_args='{"contaminante": "dioxido_de_nitrogeno"}'>
-			<h1>di&oacute;xido de nitr&oacute;geno</h1>
+			<h1>Di&oacute;xido de nitr&oacute;geno</h1>
+			<p>Nivel diario promedio 2013 - 2016</p>
 			<div id="dioxido_de_nitrogeno" class="chart" data-chart="lines" data-quantify="contaminantes" data-quantifier="linear" data-quantifier_args='{"contaminante": "dioxido_de_nitrogeno"}'></div>
 		</div>
 
 	</div>
 	<div id="fixed">
-		<div id="contaminante" data-chart="lines" class="chart cont"></div>
-		<div class="row">
-			<div id="semana" data-chart="lines" class="chart cont col-xs-6"></div>
+		<div id="charts">
+			<h3>Comparativa por a&ntilde;os por semana</h3>
+			<div id="contaminante" data-chart="lines" class="chart cont"></div>
+			<div>
+				<ul class="legend">
+					<li><span class="anio_2013"></span> 2013</li>
+					<li><span class="anio_2014"></span> 2014</li>
+					<li><span class="anio_2015"></span> 2015</li>
+					<li><span class="anio_2016"></span> 2016</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-xs-6"> 
+					<h4>Comparativa de semana por d&iacute;a</h4>
+					<div id="semana" data-chart="lines" class="chart cont"></div>
+					<div>
+						<ul class="legend">
+							<li><span class="anio_2013"></span> 2013</li>
+							<li><span class="anio_2014"></span> 2014</li>
+							<li><span class="anio_2015"></span> 2015</li>
+							<li><span class="anio_2016"></span> 2016</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="js/bootstrap.min.js"></script>
