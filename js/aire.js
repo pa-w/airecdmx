@@ -54,7 +54,7 @@ $(document).ready(function () {
 							maxs.push (ext [1]);
 							mins.push (ext [0]);
 						}
-						lines.push ({values: values, attrs: {"class": "line anio_" + y, "stepped": true}});
+						lines.push ({values: values, attrs: {"class": "line anio anio_" + y, "stepped": true}});
 					}
 				}
 				var scale = d3.scale.linear ().domain ([Math.min.apply (Math, mins), Math.max.apply (Math, maxs)]);
@@ -78,7 +78,7 @@ $(document).ready(function () {
 						var ext = d3.extent (values, function (a) { return a.avg; })
 						maxs.push (ext [1]);
 						mins.push (ext [0]);
-						lines.push ({key: args.contaminante, values: values, attrs: {"class": "line anio_" + y, "stepped": true} });
+						lines.push ({key: args.contaminante, values: values, attrs: {"class": "line anio anio_" + y, "stepped": true} });
 					}
 				}
 				var scale = d3.scale.linear ().domain ([Math.min.apply (Math, mins), Math.max.apply  (Math, maxs)]);
@@ -109,7 +109,7 @@ $(document).ready(function () {
 				semana: function (x, d, a) { 
 					var days = ["dom", "lun", "mar", "mie", "jue", "vie", "sab"];
 					
-					return {"label": days [x.dia], "value": x.anio + ": " + Math.round (x.avg), "y": a.scale (x.avg), "class": "line", "data": {}};
+					return {"label": days [x.dia], "value": x.anio + ": " + Math.round (x.avg), "y": a.scale (x.avg), "class": "anio line", "data": {}};
 				},
 				contaminantes: function (x, d, a) { 
 					var parse = [
@@ -134,7 +134,7 @@ $(document).ready(function () {
 					if (anio == 2013) {
 						label = "semana " + semana;	
 					}
-					return {"value": anio + ": " + Math.round (x.avg), "label": label, "class": "anio_" + anio + " line semana " + periodo + " semana_" + semana, "y": a.scale (x.avg), "r": 1, "data": data};
+					return {"value": anio + ": " + Math.round (x.avg), "label": label, "class": "anio anio_" + anio + " line semana " + periodo + " semana_" + semana, "y": a.scale (x.avg), "r": 1, "data": data};
 				}
 			}
 		}, callbacks: {

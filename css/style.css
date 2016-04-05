@@ -14,14 +14,14 @@ blockquote {
 	text-align: justify;
 }
 p {
-	font-size: 0.3em;
+	font-size: 0.5em !important;
+	text-align: justify;
 }
 ul {
 	list-style-type: circle;
 	list-style-position: inside;
 	margin-left: 2.5em;
 }
-.chart { max-width: 100%;}
 .tip { display: none; }
 .highlight .tip { 
 	display: block;
@@ -37,21 +37,23 @@ ul {
 	padding: 0;
 }
 text, text.label {
-	display: none;
-	fill: red;
-	font-size: 0.3em;
+	display: none; 
+	fill: black;
+	font-size: 0.5em;
 }
 .cont text { 
 	fill: black;
 	font-size: 0.5em;
 }
-text.highlight, #semana text, text.note { 
-	
+text.highlight, text.note { 
 	display: inline;
 }
 path.line { 
 	fill: none;
 	stroke: rgba(0,0,0,0.4);
+}
+path.line.selected { 
+	stroke-width: 2px;
 }
 path.line.anio_2013, span.anio_2013 { 
 	stroke: purple;
@@ -79,13 +81,11 @@ rect {
 	fill: rgba(255,255,255,0.0); 
 }
 rect.square { 
-	fill: rgba(179, 0, 179, 0.1) !important;
-}
-rect.column { 
-	fill: rgba(179, 0, 179, 0.05) !important;
+	fill: rgba(179, 0, 179, 0.0) !important;
 }
 ul.legend { 
 	margin: 0 !important;
+	font-size: 0.4em;
 }
 ul.legend li { 
 	display: inline;
@@ -93,23 +93,27 @@ ul.legend li {
 ul.legend span { 
 	display: inline-block;
 	width: 15px;
-	height: 2px;
-	margin-bottom: 5px;
+	height: 1px;
+	margin-bottom: 2px;
 }
 rect.anio_2013 { 
 	fill: rgba(255,255,255,0.0);
 }
 rect.anio_2015.amparo  {
-	fill: rgba(0, 0, 255, 0.1);
 }
 rect.anio_2015.reglamento, rect.anio_2016.reglamento {
-	fill: rgba(0, 255, 0, 0.1);
 }
 rect.highlight { 
 	fill: rgba(255,0,0,0.2) !important; 
 }
 rect.semana_1 { 
 	fill: rgba(0,100,100, 0.5);
+}
+rect.column { 
+	fill: rgba(179, 0, 179, 0.05);
+}
+rect.column.selected { 
+	fill: rgba(179,0,179, 0.1) !important;
 }
 /* MOVIE CONTAINER */
 #movie {
@@ -138,10 +142,11 @@ rect.semana_1 {
 	margin-bottom: 50vh;
 }
 #movie div p {
-	font-size: 1.0em;
-	text-align: center;
 	padding: 0.5em;
 	padding-right: 1em;
+}
+#movie div p a { 
+	margin-right: 5px;
 }
 .highlight .red { 
 	background-color: rgba(255, 0, 0, 0.5);
@@ -163,9 +168,33 @@ rect.semana_1 {
 #start { 
 	top: 0 !important;
 }
+h1 { 
+	font-size: 1.3em !important;
+}
+h3 { 
+	font-size: 1em;
+}
+h4 { 
+	font-size: 0.5em;
+}
 #intro h1 {
 	padding: 1.5em;
 	text-align: center;
+}
+/* SPECIFIC CHARTS */
+#contaminante { 
+	height: 100px;
+}
+#semana { 
+	height: 80px;
+}
+#semana .label { 
+	font-size: 0.5em;
+	display: inline;
+}
+#semana .value { 
+	font-size: 0.3em;
+	display: inline;
 }
 /* FIXED CONTAINER */
 #fixed {
@@ -180,6 +209,9 @@ rect.semana_1 {
 }
 #a_map { 
 	height: 100%;
+}
+#ctrl_anios { 
+	display: none;
 }
 /* CSS for tablets 
 @media (min-width: 768px) {
